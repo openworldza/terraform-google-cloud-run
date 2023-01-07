@@ -123,20 +123,24 @@ resource "google_cloud_run_service" "main" {
   }
 
   lifecycle {
-    ignore_changes = [
-      template[0].metadata[0].annotations["client.knative.dev/user-image"],
-      template[0].metadata[0].annotations["run.googleapis.com/client-name"],
-      template[0].metadata[0].annotations["run.googleapis.com/client-version"],
-      template[0].metadata[0].annotations["run.googleapis.com/sandbox"],
-      metadata[0].annotations["serving.knative.dev/creator"],
-      metadata[0].annotations["serving.knative.dev/lastModifier"],
-      metadata[0].annotations["run.googleapis.com/ingress-status"],
-      metadata[0].annotations["run.googleapis.com/launch-stage"],
-      metadata[0].annotations["run.googleapis.com/operation-id"],
-      metadata[0].labels["cloud.googleapis.com/location"],
-    ]
+    ignore_changes = var.lifecycle_ignore_changes
   }
 }
+#   lifecycle {
+#     ignore_changes = [
+#       template[0].metadata[0].annotations["client.knative.dev/user-image"],
+#       template[0].metadata[0].annotations["run.googleapis.com/client-name"],
+#       template[0].metadata[0].annotations["run.googleapis.com/client-version"],
+#       template[0].metadata[0].annotations["run.googleapis.com/sandbox"],
+#       metadata[0].annotations["serving.knative.dev/creator"],
+#       metadata[0].annotations["serving.knative.dev/lastModifier"],
+#       metadata[0].annotations["run.googleapis.com/ingress-status"],
+#       metadata[0].annotations["run.googleapis.com/launch-stage"],
+#       metadata[0].annotations["run.googleapis.com/operation-id"],
+#       metadata[0].labels["cloud.googleapis.com/location"],
+#     ]
+#   }
+# }
 
 resource "google_cloud_run_domain_mapping" "domain_map" {
   for_each = toset(var.verified_domain_name)
