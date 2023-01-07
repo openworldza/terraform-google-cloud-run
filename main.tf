@@ -135,6 +135,7 @@ resource "google_cloud_run_service" "main" {
       metadata[0].annotations["run.googleapis.com/operation-id"],
       metadata[0].annotations["client.knative.dev/user-image"],
       metadata[0].labels["cloud.googleapis.com/location"],
+      template[0].spec[0].containers[0].image
     ]
   }
 }
