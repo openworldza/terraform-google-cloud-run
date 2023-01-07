@@ -231,11 +231,3 @@ variable "members" {
   description = "Users/SAs to be given invoker access to the service"
   default     = []
 }
-
-
-variable "lifecycle_ignore_changes" {
-  type        = list
-  description = "Lifecycle ignore changes"
-  default     = []
-
-}
